@@ -1,0 +1,50 @@
+{
+  "categories": [
+    {
+      "title": "Loremnus non pariatur provident, quas quo",
+      "description": "Architecto atque consectetur culpa deserunt distinctio dolor eaque eum fugit id illum iste iusto laborum laudantium minus molestiae numquam perspiciatis placeat, quae quaerat quam, reiciendis sequi similique temporibus voluptatibus voluptatum?",
+      "id": 1
+    },
+    {
+      "title": "Dollarur adipiscing e",
+      "description": "Amletr sit amet, consectetur adipiscing elit, sed do eiusmod tempo",
+      "id": 2
+    }
+  ],
+  "posts": [
+    {
+      "title": "title post id 1",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i",
+      "author": "Другой автор",
+      "id": 1,
+      "categoryId": 1
+    },
+    {
+      "title": "title post id 2",
+      "body": "minima minus non pariatur provident, quas quo quod recusandae, saepe sapiente vel. Reprehenderit.minima minus non pariatur provident, quas quo quod recusandae, saepe sapiente vel. Reprehenderit.minima minus non pariatur provident, quas quo quod recusandae, saepe sapiente vel. Reprehenderit.em ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i",
+      "author": "Some Author",
+      "id": 2,
+      "categoryId": 1
+    }
+  ],
+  "comments": [
+    {
+      "username": "Muindor",
+      "body": "Тело комментария",
+      "id": 1,
+      "postId": 1
+    },
+    {
+      "username": "Muindor",
+      "body": "Тело совсем другого комментария 147%",
+      "id": 2,
+      "postId": 1
+    },
+    {
+      "username": "Muindor",
+      "body": "Новый комментарий!!\n",
+      "id": 3,
+      "postId": 1
+    }
+  ]
+}

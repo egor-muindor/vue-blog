@@ -1,0 +1,43 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+/* */
+import BootstrapVue from 'bootstrap-vue'
+import VueResource from 'vue-resource'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+/* */
+import Main from '@/components/Main'
+import Categories from '@/components/Categories'
+import Category from '@/components/Category'
+import Post from '@/components/Post'
+
+Vue.config.productionTip = false
+Vue.use(VueResource)
+Vue.use(BootstrapVue)
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/post/:id',
+      name: 'Post',
+      component: Post
+    },
+    {
+      path: '/category/:id',
+      name: 'Category',
+      component: Category
+    },
+    {
+      path: '/category/',
+      name: 'Categories',
+      component: Categories
+    }
+  ]
+})
