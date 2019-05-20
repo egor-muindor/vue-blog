@@ -3,7 +3,8 @@
     <div class="row justify-content-center">
       <div class="col-8">
         <div class="nav">
-          <router-link class="nav-item btn btn-secondary" :to="{path: `/category/${post.categoryId}`}">Назад</router-link>
+          <router-link class="nav-item btn btn-secondary" :to="{path: `/category/${post.categoryId}`}">Назад
+          </router-link>
         </div>
         <br>
         <div class="card">
@@ -13,16 +14,17 @@
             <p>{{post.body}}</p>
           </div>
         </div>
-        <div id="comments" v-if="this.post.comments.length > 0" class="card" style="margin-top: 15px" >
+        <div id="comments" v-if="this.post.comments.length > 0" class="card" style="margin-top: 15px">
           <div class="card-body">
             <h4 class="text-secondary">Комментарии</h4>
             <div v-for="(comment, key) in post.comments" :key="key" class="form-group">
               <div style="margin-bottom: 5px" class="text-secondary row">
                 <div class="col">
-                <a>Автор: </a><a class="font-weight-bold text-info">{{comment.username}}</a>
+                  <a>Автор: </a><a class="font-weight-bold text-info">{{comment.username}}</a>
                 </div>
                 <div class="col text-right ">
-                <a class="text-danger" @click="deleteComment(comment.id)">Удалить</a>
+                  <a class="text-primary" @click="editComment(comment.id)">Редактировать</a>
+                  <a class="text-danger" @click="deleteComment(comment.id)">Удалить</a>
                 </div>
               </div>
               <p>{{comment.body}}</p>
@@ -51,6 +53,31 @@
         </div>
       </div>
     </div>
+    <div>
+      <b-modal @cancel="updateComment('cancel')" @ok="updateComment('ok')" ref="edit-modal" id="edit-modal" title="Редактирования">
+        <div class="form-group">
+          <a>Автор комментария: </a><a class="font-weight-bold text-info">{{editingComment.username}}</a><br>
+          <label class="col-form-label" for="">Комментарий</label>
+          <input class="form-control" v-model="editingComment.body">
+        </div>
+        <template slot="modal-footer" slot-scope="{ cancel, ok }" class="w-100">
+          <b-button
+            variant="danger"
+            size="sm"
+            class="float-left"
+            @click="cancel()"
+          >Отменить
+          </b-button>
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-right"
+            @click="ok()"
+          >Сохранить
+          </b-button>
+        </template>
+      </b-modal>
+    </div>
   </div>
 </template>
 
@@ -63,6 +90,8 @@ export default {
       post: {
         comments: []
       },
+      editingId: 0,
+      editingComment: {},
       newComment: {
         username: '',
         body: '',
@@ -83,6 +112,31 @@ export default {
             this.newComment.postId = this.id * 1
           })
           .catch(error => console.log(error))
+      }
+    },
+    editComment: function (id) {
+      this.editingId = id
+      this.$http.get('http://localhost:3000/comments/' + this.editingId)
+        .then(result => result.json())
+        .then(result => {
+          this.editingComment = result
+        })
+      this.$bvModal.show('edit-modal')
+    },
+    updateComment: function (status) {
+      if (status === 'ok') {
+        if (this.editingComment.body !== '') {
+          this.$http.put('http://localhost:3000/comments/' + this.editingId, this.editingComment)
+            .then(() => {
+              this.$http.get('http://localhost:3000/comments/')
+                .then(result => result.json())
+                .then(result => {
+                  this.post.comments = result
+                })
+            })
+            .catch(error => console.log(error))
+
+        }
       }
     },
     deleteComment: function (id) {
