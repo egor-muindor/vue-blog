@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "title": "Loremnus non pariatur provident, quas quo",
+      "title": "Loremnus non pariatur provident, quas quo1",
       "description": "Architecto atque consectetur culpa deserunt distinctio dolor eaque eum fugit id illum iste iusto laborum laudantium minus molestiae numquam perspiciatis placeat, quae quaerat quam, reiciendis sequi similique temporibus voluptatibus voluptatum?",
       "id": 1
     },
@@ -9,6 +9,11 @@
       "title": "Dollarur adipiscing e",
       "description": "Amletr sit amet, consectetur adipiscing elit, sed do eiusmod tempo",
       "id": 2
+    },
+    {
+      "title": "Первая категория, созданная через форму",
+      "description": "Первое описание категории",
+      "id": 3
     }
   ],
   "posts": [

@@ -6,7 +6,7 @@
           <div class="container">
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
-                <a class="nav-item btn btn-secondary" @click="$router.back()">Назад</a>
+                <a class="nav-item btn btn-secondary" @click="$router.push('/category/' + post.categoryId)">Назад</a>
               </ul>
               <ul class="navbar-nav ml-auto">
 

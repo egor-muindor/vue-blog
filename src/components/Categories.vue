@@ -4,9 +4,16 @@
       <div class="col-8">
         <div class="card">
           <div class="card-body">
-            <h2>
-              Список категорий
-            </h2>
+            <div class="form-row">
+              <div class="col">
+                <h2>
+                  Список категорий
+                </h2>
+              </div>
+              <div class="col text-right">
+                <a class="btn btn-outline-primary" @click="$router.push('/category/create')">Создать новую категорию</a>
+              </div>
+            </div>
             <hr>
             <router-link v-for="(category, key) in categories" :key="key"
                :to="{path: '/category/' + category.id}">
