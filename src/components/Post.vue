@@ -2,14 +2,29 @@
   <div class="py-4">
     <div class="row justify-content-center">
       <div class="col-8">
-        <div class="nav">
-          <router-link class="nav-item btn btn-secondary" :to="{path: `/category/${post.categoryId}`}">Назад
-          </router-link>
-        </div>
-        <br>
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+          <div class="container">
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <a class="nav-item btn btn-secondary" @click="$router.back()">Назад</a>
+              </ul>
+              <ul class="navbar-nav ml-auto">
+
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div class="card">
           <div class="card-body">
-            <h2>{{post.title}}</h2>
+            <div class="row">
+            <div class="col">
+              <h2>{{post.title}}</h2>
+            </div>
+              <div class="col text-right">
+                <a class="btn btn-sm btn-outline-primary" @click="$router.push('/post/' + id +'/edit')">Редактировать</a>
+              </div>
+            </div>
+            <a class="text-secondary">Автор: </a><a class="text-info">{{post.author}}</a>
             <hr>
             <p>{{post.body}}</p>
           </div>
@@ -38,13 +53,13 @@
               <div class="form-row">
                 <div class="col form-group">
                   <label for="username">Никнейм</label>
-                  <input required class="form-control" id="username" v-model.lazy="newComment.username">
+                  <input placeholder="Ваш никнейм" required class="form-control" id="username" v-model.lazy="newComment.username">
                 </div>
               </div>
               <div class="form-row">
                 <div class="col form-group">
                   <label for="body">Комментарий</label>
-                  <textarea required class="form-control" id="body" v-model.lazy="newComment.body"></textarea>
+                  <textarea placeholder="Ваш комментарий" required class="form-control" id="body" v-model.lazy="newComment.body"></textarea>
                 </div>
               </div>
               <button class="btn btn-primary" type="submit" @click="sendComment">Отправить</button>
@@ -58,7 +73,7 @@
         <div class="form-group">
           <a>Автор комментария: </a><a class="font-weight-bold text-info">{{editingComment.username}}</a><br>
           <label class="col-form-label" for="">Комментарий</label>
-          <input class="form-control" v-model="editingComment.body">
+          <textarea placeholder="Ваш комментарий" class="form-control" v-model="editingComment.body"></textarea>
         </div>
         <template slot="modal-footer" slot-scope="{ cancel, ok }" class="w-100">
           <b-button
@@ -135,7 +150,6 @@ export default {
                 })
             })
             .catch(error => console.log(error))
-
         }
       }
     },

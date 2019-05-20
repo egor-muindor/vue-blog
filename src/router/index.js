@@ -10,6 +10,8 @@ import Main from '@/components/Main'
 import Categories from '@/components/Categories'
 import Category from '@/components/Category'
 import Post from '@/components/Post'
+import CreatePost from '@/components/CreatePost'
+import EditPost from '@/components/EditPost'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
@@ -23,6 +25,16 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main
+    },
+    {
+      path: '/post/create',
+      name: 'CreatePost',
+      component: CreatePost
+    },
+    {
+      path: '/post/:id/edit',
+      name: 'EditPost',
+      component: EditPost
     },
     {
       path: '/post/:id',
