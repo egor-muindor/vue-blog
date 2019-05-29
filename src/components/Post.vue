@@ -38,8 +38,8 @@
                   <a>Автор: </a><a class="font-weight-bold text-info">{{comment.username}}</a>
                 </div>
                 <div class="col text-right ">
-                  <a class="text-primary" @click="editComment(comment.id)">Редактировать</a>
-                  <a class="text-danger" @click="deleteComment(comment.id)">Удалить</a>
+                  <a class="btn mr-1 btn-sm btn-outline-primary" @click="editComment(comment.id)">Редактировать</a>
+                  <a class="btn btn-sm btn-outline-danger" @click="deleteComment(comment.id)">Удалить</a>
                 </div>
               </div>
               <p>{{comment.body}}</p>
@@ -49,7 +49,7 @@
         </div>
         <div style="margin-top: 15px" class="card">
           <div class="card-body">
-            <form action="#comments">
+            <form @submit="sendComment" action="javascript:void(0);">
               <div class="form-row">
                 <div class="col form-group">
                   <label for="username">Никнейм</label>
@@ -62,7 +62,7 @@
                   <textarea placeholder="Ваш комментарий" required class="form-control" id="body" v-model.lazy="newComment.body"></textarea>
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit" @click="sendComment">Отправить</button>
+              <button class="btn btn-primary" type="submit">Отправить</button>
             </form>
           </div>
         </div>
@@ -117,17 +117,15 @@ export default {
   },
   methods: {
     sendComment: function () {
-      if (this.newComment.username && this.newComment.body) {
-        this.$http.post('http://localhost:3000/comments', {...this.newComment})
-          .then(result => this.post.comments.push(result.body))
-          .then(() => {
-            for (let i in this.newComment) {
-              this.newComment[i] = ''
-            }
-            this.newComment.postId = this.id * 1
-          })
-          .catch(error => console.log(error))
-      }
+      this.$http.post('http://localhost:3000/comments', {...this.newComment})
+        .then(result => this.post.comments.push(result.body))
+        .then(() => {
+          for (let i in this.newComment) {
+            this.newComment[i] = ''
+          }
+          this.newComment.postId = this.id * 1
+        })
+        .catch(error => console.log(error))
     },
     editComment: function (id) {
       this.editingId = id
@@ -143,7 +141,7 @@ export default {
         if (this.editingComment.body !== '') {
           this.$http.put('http://localhost:3000/comments/' + this.editingId, this.editingComment)
             .then(() => {
-              this.$http.get('http://localhost:3000/comments/')
+              this.$http.get('http://localhost:3000/comments/' + '?postId=' + this.id)
                 .then(result => result.json())
                 .then(result => {
                   this.post.comments = result
